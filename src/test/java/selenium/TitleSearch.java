@@ -1,18 +1,16 @@
 package selenium;
+
+
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.*;
-
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SeleneiumTest {
+public class TitleSearch {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -21,17 +19,17 @@ public class SeleneiumTest {
   @Before
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
-    baseUrl = "http://derstandard.at/";
+    baseUrl = "http://www.onb.ac.at/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void test() throws Exception {
+  public void testSearchTitle() throws Exception {
     driver.get(baseUrl + "/");
-    driver.findElement(By.linkText("Gesundheit")).click();
-    driver.findElement(By.linkText("Wissenschaft")).click();
-    driver.findElement(By.linkText("Kultur")).click();
-    driver.findElement(By.linkText("Etat")).click();
+    driver.findElement(By.id("catalog-search-input")).clear();
+    driver.findElement(By.id("catalog-search-input")).sendKeys("waiting for godot");
+    driver.findElement(By.id("catalog-search-button")).click();
+    driver.findElement(By.linkText("Waiting for Godot [En attendant Godot. Engl.]. A tragicomedy in 2 acts. (1. publ.)")).click();
   }
 
   @After
@@ -76,5 +74,3 @@ public class SeleneiumTest {
     }
   }
 }
-
-
